@@ -107,4 +107,4 @@ Após a conclusão dos testes, será gerada uma pasta `coverage` na raiz do proj
 
 ## Comandos utilizados na construção do projeto
 
-Caso deseje configurar um projeto seguindo os passos dos commits, listo abaixo os comandos executados nesta terceira parte da configuração. Este projeto utiliza como base o projeto [jobsonita/rocketseat-bootcamp-nivel04-modulo02](https://github.com/jobsonita/rocketseat-bootcamp-nivel04-modulo02).
+Caso deseje configurar um projeto seguindo os passos dos commits, listo abaixo os comandos executados nesta quinta parte da configuração. Este projeto utiliza como base o projeto [jobsonita/rocketseat-bootcamp-nivel04-modulo02](https://github.com/jobsonita/rocketseat-bootcamp-nivel04-modulo02).
