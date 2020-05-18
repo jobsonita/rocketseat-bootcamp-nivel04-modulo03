@@ -10,11 +10,11 @@ Baseado nas aulas do curso [GoStack](https://rocketseat.com.br/gostack) (turma 1
 
 ## Sobre este projeto
 
-Este projeto demonstra a aplicação dos princípios de DDD e TDD em um back-end em NodeJS. Neste projeto, é utilizada a biblioteca jest. Para guiar o desenvolvimento, as funcionalidades deste sistema estão descritas em [features.md](features.md).
+Este projeto demonstra a aplicação de conceitos de segurança, cache e notificações em um back-end com testes automatizados, bem como adaptações para colocá-lo em produção. Para guiar o desenvolvimento, as funcionalidades deste sistema estão descritas em [features.md](features.md).
 
-Este repositório continua o desenvolvimento do back-end iniciado em [jobsonita/rocketseat-bootcamp-nivel02-modulo01](https://github.com/jobsonita/rocketseat-bootcamp-nivel02-modulo01) e continuado em [jobsonita/rocketseat-bootcamp-nivel02-modulo02](https://github.com/jobsonita/rocketseat-bootcamp-nivel02-modulo02) e [jobsonita/rocketseat-bootcamp-nivel04-modulo01](https://github.com/jobsonita/rocketseat-bootcamp-nivel04-modulo01).
+Este repositório continua o desenvolvimento do back-end iniciado em [jobsonita/rocketseat-bootcamp-nivel02-modulo01](https://github.com/jobsonita/rocketseat-bootcamp-nivel02-modulo01) e continuado em [jobsonita/rocketseat-bootcamp-nivel02-modulo02](https://github.com/jobsonita/rocketseat-bootcamp-nivel02-modulo02), [jobsonita/rocketseat-bootcamp-nivel04-modulo01](https://github.com/jobsonita/rocketseat-bootcamp-nivel04-modulo01) e [jobsonita/rocketseat-bootcamp-nivel04-modulo02](https://github.com/jobsonita/rocketseat-bootcamp-nivel04-modulo02).
 
-Para maiores detalhes sobre o passo-a-passo da configuração do projeto, utilize a seção "Comandos utilizados na construção do projeto" deste readme em conjunto com o detalhamento dos [commits](https://github.com/jobsonita/rocketseat-bootcamp-nivel04-modulo02/commits/master) deste repositório.
+Para maiores detalhes sobre o passo-a-passo da configuração do projeto, utilize a seção "Comandos utilizados na construção do projeto" deste readme em conjunto com o detalhamento dos [commits](https://github.com/jobsonita/rocketseat-bootcamp-nivel04-modulo03/commits/master) deste repositório.
 
 Este projeto pode ser usado em conjunto com o front-end disponibilizado em [jobsonita/rocketseat-bootcamp-nivel03-modulo02](https://github.com/jobsonita/rocketseat-bootcamp-nivel03-modulo02).
 
@@ -107,39 +107,4 @@ Após a conclusão dos testes, será gerada uma pasta `coverage` na raiz do proj
 
 ## Comandos utilizados na construção do projeto
 
-Caso deseje configurar um projeto seguindo os passos dos commits, listo abaixo os comandos executados nesta terceira parte da configuração. Este projeto utiliza como base o projeto [jobsonita/rocketseat-bootcamp-nivel04-modulo01](https://github.com/jobsonita/rocketseat-bootcamp-nivel04-modulo01).
-
-### Sessão 02
-
-#### Aula 06
-
-```
-yarn add nodemailer
-yarn add @types/nodemailer -D
-```
-
-A configuração atual do client do nodemailer sendo inicializado na classe EtherealMailProvider, com uma instância do EtherealMailProvider sendo registrada no container de injeção, não é ideal.
-Isso provavelmente será resolvido em aulas futuras.
-Uma opção seria criar "providers" separados para conexões com serviços externos, registrá-los como instâncias no container, e daí sim usá-los nos providers, no estilo:
-
-```
-constructor(
-  @inject('NodemailerProvider')
-  private nodemailerProvider: INodemailerProvider
-)
-
-...
-
-await this.nodemailerProvider.client.sendMail(...)
-```
-
-#### Aula 07
-
-```
-yarn add handlebars
-```
-
-#### Aula 08
-
-O esquema de templates atual, com as views do handlebars dentro de cada module, não é ideal.
-Eu pretendo mover esses arquivos para `@shared/infra/handlebars/email_templates` e criar um provider próprio para templates no futuro (com um método `getEmailTemplate(template_name)`).
+Caso deseje configurar um projeto seguindo os passos dos commits, listo abaixo os comandos executados nesta terceira parte da configuração. Este projeto utiliza como base o projeto [jobsonita/rocketseat-bootcamp-nivel04-modulo02](https://github.com/jobsonita/rocketseat-bootcamp-nivel04-modulo02).
