@@ -1,11 +1,14 @@
 import Appointment from '../infra/typeorm/entities/Appointment'
 
+import FakeNotificationsRepository from '@modules/notifications/repositories/fakes/FakeNotificationsRepository'
+
 import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository'
 
 import CreateAppointmentService from './CreateAppointmentService'
 import ListProviderAppointmentsService from './ListProviderAppointmentsService'
 
 let fakeAppointmentsRepository: FakeAppointmentsRepository
+let fakeNotificationsRepository: FakeNotificationsRepository
 
 let createAppointment: CreateAppointmentService
 let listProviderAppointments: ListProviderAppointmentsService
@@ -13,8 +16,12 @@ let listProviderAppointments: ListProviderAppointmentsService
 describe('ListProviderAppointments', () => {
   beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository()
+    fakeNotificationsRepository = new FakeNotificationsRepository()
 
-    createAppointment = new CreateAppointmentService(fakeAppointmentsRepository)
+    createAppointment = new CreateAppointmentService(
+      fakeAppointmentsRepository,
+      fakeNotificationsRepository
+    )
     listProviderAppointments = new ListProviderAppointmentsService(
       fakeAppointmentsRepository
     )

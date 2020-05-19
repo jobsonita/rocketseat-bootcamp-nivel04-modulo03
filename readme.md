@@ -136,3 +136,9 @@ yarn add mongodb
 ```
 
 Importante: modificar o .env conforme a nova versão do .env.example
+
+#### Aula 05
+
+```
+yarn add @types/mongodb -D
+```
