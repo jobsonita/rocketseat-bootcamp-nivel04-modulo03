@@ -27,7 +27,7 @@ Este projeto pode ser usado em conjunto com o front-end disponibilizado em [jobs
 - express
 - typescript
 - eslint + prettier (padronização de código)
-- typeorm (com PostgreSQL, biblioteca pg)
+- typeorm (com PostgreSQL e MongDB, bibliotecas pg e mongdb)
 - jsonwebtoken (autenticação)
 - multer (configurado para armazenamento local)
 - tsyringe (injeção de dependências)
@@ -38,6 +38,7 @@ Este projeto pode ser usado em conjunto com o front-end disponibilizado em [jobs
 - Docker (gerenciador de contêiners)
 - Contêiner postgres (através do Docker)
 - Postbird ou DBeaver (PostgreSQL GUI client)
+- MongoDB Compass Community (MongoDB GUI client)
 - Insomnia (simulação de requisições HTTP REST)
 
 ## Instalação e execução
@@ -48,33 +49,43 @@ Com um terminal aberto na raiz do projeto, execute:
 yarn
 ```
 
-Após a instalação das bibliotecas, instale o Docker em sua máquina e crie uma réplica do contêiner postgres no docker:
+Após a instalação das bibliotecas, instale o Docker em sua máquina e crie réplicas dos contêiners postgres e mongo no docker:
 
 ```
-docker run --name gostack_postgres -e POSTGRES_PASSWORD=your_password -p 5432:5432 -d postgres:11
+docker run --name gostack_postgres -e POSTGRES_USER=your_pg_username -e POSTGRES_PASSWORD=your_pg_password -p 5432:5432 -d postgres:11
+
+docker run --name gostack_mongodb -e MONGO_INITDB_ROOT_USERNAME=your_mg_username -e MONGO_INITDB_ROOT_PASSWORD=your_mg_password -p 27017:27017 -d mongo
 ```
 
-O contêiner será ativado por padrão, mas confira usando a primeira linha abaixo e, se o contâiner não estiver ativo, execute a segunda linha para ativá-lo:
+Os contêiners serão ativados por padrão, mas confira usando a primeira linha abaixo e, se algum contêiner não estiver ativo, execute a segunda linha para ativá-lo:
 
 ```
 docker ps -a
 docker start gostack_postgres
+docker start gostack_mongodb
 ```
 
-Após a criação do banco de dados, use um cliente sql de sua preferência (como Postbird ou DBeaver) para se conectar ao docker e crie um banco de dados chamado "gobarber". Em seguida, faça uma copia do arquivo .env.example com o nome .env e preencha os dados de conexão:
+Após a criação do contêiner do postgres, use um cliente sql de sua preferência (como Postbird ou DBeaver) para se conectar ao docker e crie um banco de dados chamado "gobarber". Em seguida, faça uma copia do arquivo .env.example com o nome .env e preencha os dados das conexões:
 
 ```
-TYPEORM_CONNECTION = postgres
-TYPEORM_HOST = localhost
-TYPEORM_PORT = 5432
-TYPEORM_USERNAME = postgres
-TYPEORM_PASSWORD = your_password
-TYPEORM_DATABASE = gobarber
-TYPEORM_LOGGING = true
-TYPEORM_ENTITIES_DIR = src/modules/*/infra/typeorm/entities
-TYPEORM_MIGRATIONS_DIR = src/shared/infra/typeorm/migrations
-TYPEORM_ENTITIES = src/modules/*/infra/typeorm/entities/*.ts
-TYPEORM_MIGRATIONS = src/shared/infra/typeorm/migrations/*.ts
+SQL_DIALECT = postgres
+SQL_HOST = localhost
+SQL_PORT = 5432
+SQL_USER = your_pg_username
+SQL_PASS = your_pg_password
+SQL_DB = gobarber
+SQL_LOGGING = all
+SQL_ENTITIES_GLOB_PATTERN = src/modules/*/infra/typeorm/entities/*.ts
+SQL_MIGRATIONS_GLOB_PATTERN = src/shared/infra/typeorm/migrations/*.ts
+SQL_CLI_MIGRATIONS_DIR = src/shared/infra/typeorm/migrations
+
+MONGO_HOST = localhost
+MONGO_PORT = 27017
+MONGO_USER = your_mg_username
+MONGO_PASS = your_mg_password
+MONGO_DB = gobarber
+MONGO_LOGGING = all
+MONGO_ENTITIES_GLOB_PATTERN = src/modules/*/infra/typeorm/schemas/*.ts
 ```
 
 Com o terminal aberto na raiz do projeto, execute a migração das tabelas:
@@ -108,3 +119,20 @@ Após a conclusão dos testes, será gerada uma pasta `coverage` na raiz do proj
 ## Comandos utilizados na construção do projeto
 
 Caso deseje configurar um projeto seguindo os passos dos commits, listo abaixo os comandos executados nesta quinta parte da configuração. Este projeto utiliza como base o projeto [jobsonita/rocketseat-bootcamp-nivel04-modulo02](https://github.com/jobsonita/rocketseat-bootcamp-nivel04-modulo02).
+
+### Sessão 01
+
+#### Aula 02
+
+```
+docker run --name gostack_mongodb -e MONGO_INITDB_ROOT_USERNAME=your_mg_username -e MONGO_INITDB_ROOT_PASSWORD=your_mg_password -p 27017:27017 -d mongo
+```
+
+#### Aula 03
+
+```
+yarn add dotenv-safe
+yarn add mongodb
+```
+
+Importante: modificar o .env conforme a nova versão do .env.example
