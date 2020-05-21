@@ -75,9 +75,6 @@ SQL_USER = your_pg_username
 SQL_PASS = your_pg_password
 SQL_DB = gobarber
 SQL_LOGGING = all
-SQL_ENTITIES_GLOB_PATTERN = src/modules/*/infra/typeorm/entities/*.ts
-SQL_MIGRATIONS_GLOB_PATTERN = src/shared/infra/typeorm/migrations/*.ts
-SQL_CLI_MIGRATIONS_DIR = src/shared/infra/typeorm/migrations
 
 MONGO_HOST = localhost
 MONGO_PORT = 27017
@@ -85,7 +82,6 @@ MONGO_USER = your_mg_username
 MONGO_PASS = your_mg_password
 MONGO_DB = gobarber
 MONGO_LOGGING = all
-MONGO_ENTITIES_GLOB_PATTERN = src/modules/*/infra/typeorm/schemas/*.ts
 ```
 
 Com o terminal aberto na raiz do projeto, execute a migração das tabelas:

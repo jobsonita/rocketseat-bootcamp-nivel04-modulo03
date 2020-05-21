@@ -66,10 +66,10 @@ module.exports = [
     password: process.env.SQL_PASS,
     database: process.env.SQL_DB,
     logging: parseLoggingOptions(process.env.SQL_LOGGING),
-    entities: [process.env.SQL_ENTITIES_GLOB_PATTERN],
-    migrations: [process.env.SQL_MIGRATIONS_GLOB_PATTERN],
+    entities: ['src/modules/*/infra/typeorm/entities/*.ts'],
+    migrations: ['src/shared/infra/typeorm/migrations/*.ts'],
     cli: {
-      migrationsDir: process.env.SQL_CLI_MIGRATIONS_DIR,
+      migrationsDir: 'src/shared/infra/typeorm/migrations',
     },
   },
   {
@@ -81,7 +81,7 @@ module.exports = [
     password: process.env.MONGO_PASS,
     database: process.env.MONGO_DB,
     logging: parseLoggingOptions(process.env.MONGO_LOGGING),
-    entities: [process.env.MONGO_ENTITIES_GLOB_PATTERN],
+    entities: ['src/modules/*/infra/typeorm/schemas/*.ts'],
     useUnifiedTopology: true,
     extra: {
       authSource: 'admin',
