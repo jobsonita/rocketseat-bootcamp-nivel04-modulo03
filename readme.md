@@ -84,6 +84,8 @@ MONGO_DB = gobarber
 MONGO_LOGGING = all
 ```
 
+Substitua também outros dados do .env que envolverem dados sensíveis (senhas e chaves secretas).
+
 Com o terminal aberto na raiz do projeto, execute a migração das tabelas:
 
 ```
@@ -139,7 +141,7 @@ Importante: modificar o .env conforme a nova versão do .env.example
 yarn add @types/mongodb -D
 ```
 
-### Sessão 03
+### Sessão 02
 
 #### Aula 01
 
@@ -147,3 +149,7 @@ yarn add @types/mongodb -D
 yarn add celebrate
 yarn add @types/hapi__joi -D
 ```
+
+#### Aula 02
+
+Não segui exatamente o mesmo modelo de .env da aula, pois já vinha usando minhas próprias configurações.

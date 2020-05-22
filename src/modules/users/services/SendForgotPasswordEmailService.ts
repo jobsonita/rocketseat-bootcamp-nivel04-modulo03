@@ -1,6 +1,8 @@
 import path from 'path'
 import { inject, injectable } from 'tsyringe'
 
+import appConfig from '@config/app'
+
 import AppError from '@shared/errors/AppError'
 
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider'
@@ -51,7 +53,7 @@ export default class SendForgotPasswordEmailService {
         file: forgotPasswordTemplateFile,
         variables: {
           name: user.name,
-          link: `http://localhost:3000/reset_password?token=${token}`,
+          link: `${appConfig.web_url}/reset_password?token=${token}`,
         },
       },
     })
