@@ -17,7 +17,7 @@ interface IRequest {
 }
 
 interface IResponse {
-  user: Omit<User, 'password'>
+  user: User
   token: string
 }
 
@@ -52,8 +52,6 @@ export default class AuthenticateUserService {
       expiresIn: authConfig.tokenDuration,
     })
 
-    const { password: _, ...userWithoutPassword } = user
-
-    return { user: userWithoutPassword, token }
+    return { user, token }
   }
 }

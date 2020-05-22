@@ -153,3 +153,9 @@ yarn add @types/hapi__joi -D
 #### Aula 02
 
 Não segui exatamente o mesmo modelo de .env da aula, pois já vinha usando minhas próprias configurações.
+
+#### Aula 03
+
+```
+yarn add class-transformer
+```

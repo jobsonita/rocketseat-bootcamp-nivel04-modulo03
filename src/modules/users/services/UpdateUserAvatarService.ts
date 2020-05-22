@@ -23,10 +23,7 @@ export default class UpdateUserAvatarService {
     private storageProvider: IStorageProvider
   ) {}
 
-  public async execute({
-    user_id,
-    avatarFilename,
-  }: IRequest): Promise<Omit<User, 'password'>> {
+  public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id)
 
     if (!user) {
@@ -41,10 +38,8 @@ export default class UpdateUserAvatarService {
 
     user.avatar = filename
 
-    await this.usersRepository.save(user)
+    const updatedUser = await this.usersRepository.save(user)
 
-    const { password: _, ...userWithoutPassword } = user
-
-    return userWithoutPassword
+    return updatedUser
   }
 }

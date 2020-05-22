@@ -23,11 +23,7 @@ export default class CreateUserService {
     private hashProvider: IHashProvider
   ) {}
 
-  public async execute({
-    name,
-    email,
-    password,
-  }: IRequest): Promise<Omit<User, 'password'>> {
+  public async execute({ name, email, password }: IRequest): Promise<User> {
     const userWithSameEmailExists = await this.usersRepository.findByEmail(
       email
     )
@@ -44,8 +40,6 @@ export default class CreateUserService {
       password: hashedPassword,
     })
 
-    const { password: _, ...userWithoutPassword } = user
-
-    return userWithoutPassword
+    return user
   }
 }

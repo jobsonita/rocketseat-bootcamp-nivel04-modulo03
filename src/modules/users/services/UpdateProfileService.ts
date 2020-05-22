@@ -32,7 +32,7 @@ export default class UpdateProfileService {
     email,
     old_password,
     password,
-  }: IRequest): Promise<Omit<User, 'password'>> {
+  }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id)
 
     if (!user) {
@@ -64,11 +64,8 @@ export default class UpdateProfileService {
       user.password = await this.hashProvider.generateHash(password)
     }
 
-    const {
-      password: _,
-      ...userWithoutPassword
-    } = await this.usersRepository.save(user)
+    const updatedUser = await this.usersRepository.save(user)
 
-    return userWithoutPassword
+    return updatedUser
   }
 }

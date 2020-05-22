@@ -14,13 +14,13 @@ export default class ProviderDayAvailabilityController {
       ListProviderDayAvailabilityService
     )
 
-    const provider = await listProviderDayAvailability.execute({
+    const availability = await listProviderDayAvailability.execute({
       provider_id,
       day,
       month,
       year,
     })
 
-    return res.json(provider)
+    return res.json(availability)
   }
 }

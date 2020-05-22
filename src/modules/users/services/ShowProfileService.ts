@@ -17,15 +17,13 @@ export default class ShowProfileService {
     private usersRepository: IUsersRepository
   ) {}
 
-  public async execute({ user_id }: IRequest): Promise<Omit<User, 'password'>> {
+  public async execute({ user_id }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id)
 
     if (!user) {
       throw new AppError('User not found')
     }
 
-    const { password: _, ...userWithoutPassword } = user
-
-    return userWithoutPassword
+    return user
   }
 }
