@@ -159,3 +159,11 @@ Não segui exatamente o mesmo modelo de .env da aula, pois já vinha usando minh
 ```
 yarn add class-transformer
 ```
+
+#### Aula 04
+
+```
+yarn add aws-sdk
+```
+
+Eu configurei o projeto para usar AWS, mas ainda não criei uma conta, então é possível que haja erros na configuração.
