@@ -138,3 +138,12 @@ Importante: modificar o .env conforme a nova versão do .env.example
 ```
 yarn add @types/mongodb -D
 ```
+
+### Sessão 03
+
+#### Aula 01
+
+```
+yarn add celebrate
+yarn add @types/hapi__joi -D
+```
