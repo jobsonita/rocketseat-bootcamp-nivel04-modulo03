@@ -1,13 +1,14 @@
-node_modules
+node_modules/
 
-dist
+dist/
 
 tmp/**
 !tmp/**/
 !tmp/**/.gitkeep
 
 .env
+.env.test
 
 **/*.orig
 
-coverage
+coverage/

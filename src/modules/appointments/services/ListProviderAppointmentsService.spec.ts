@@ -32,7 +32,7 @@ describe('ListProviderAppointments', () => {
 
     jest
       .spyOn(Date, 'now')
-      .mockImplementationOnce(() => new Date(2020, 4, 10, 12).getTime())
+      .mockImplementation(() => new Date(2020, 4, 10, 12).getTime())
 
     appointments.push(
       await createAppointment.execute({
