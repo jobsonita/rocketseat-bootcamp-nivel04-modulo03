@@ -10,7 +10,7 @@ import UsersController from '../controllers/UsersController'
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated'
 
-const upload = multer(uploadConfig)
+const upload = multer(uploadConfig.multer)
 
 const router = Router()
 const userAvatarController = new UserAvatarController()

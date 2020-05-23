@@ -167,3 +167,11 @@ yarn add aws-sdk
 ```
 
 Eu configurei o projeto para usar AWS, mas ainda não criei uma conta, então é possível que haja erros na configuração.
+
+#### Aula 06
+
+```
+yarn add mime
+```
+
+Eu configurei o projeto para usar AWS, mas ainda não criei uma conta, então é possível que haja erros na configuração.

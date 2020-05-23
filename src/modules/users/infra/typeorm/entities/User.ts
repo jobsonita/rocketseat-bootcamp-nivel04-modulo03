@@ -9,6 +9,7 @@ import {
 import { Exclude, Expose } from 'class-transformer'
 
 import appConfig from '@config/app'
+import uploadConfig from '@config/upload'
 
 @Entity('users')
 export default class User {
@@ -37,6 +38,17 @@ export default class User {
 
   @Expose({ name: 'avatar_url' })
   getAvatarUrl(): string | null {
-    return this.avatar && `${appConfig.api_url}/files/${this.avatar}`
+    if (!this.avatar) {
+      return null
+    }
+
+    switch (uploadConfig.driver) {
+      case 'disk':
+        return `${appConfig.api_url}/files/${this.avatar}`
+      case 's3':
+        return `${uploadConfig.s3.base_url}/${this.avatar}`
+      default:
+        throw new Error(`Unknown upload driver "${uploadConfig.driver}"`)
+    }
   }
 }
