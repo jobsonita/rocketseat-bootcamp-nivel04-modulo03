@@ -1,4 +1,4 @@
-type MailDriver = 'ethereal' | 'ses'
+export type MailDriver = 'ethereal' | 'ses'
 
 type Sender = {
   name: string
