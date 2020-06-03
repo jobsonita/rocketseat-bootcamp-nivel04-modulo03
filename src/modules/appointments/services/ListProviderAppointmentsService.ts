@@ -29,11 +29,23 @@ export default class CreateAppointmentService {
     month,
     year,
   }: IRequest): Promise<Appointment[]> {
-    return this.appointmentsRepository.findAllInDayFromProvider({
-      provider_id,
-      day,
-      month,
-      year,
-    })
+    const key = `provider-appointments:${provider_id}:${year}-${month}-${day}`
+
+    let appointments = await this.cacheProvider.retrieve<Appointment[]>(key)
+
+    if (!appointments) {
+      appointments = await this.appointmentsRepository.findAllInDayFromProvider(
+        {
+          provider_id,
+          day,
+          month,
+          year,
+        }
+      )
+
+      await this.cacheProvider.store(key, appointments)
+    }
+
+    return appointments
   }
 }

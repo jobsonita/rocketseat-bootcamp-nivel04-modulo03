@@ -21,7 +21,7 @@ export default class ListProvidersService {
   ) {}
 
   public async execute({ except_user_id }: IRequest): Promise<User[]> {
-    const key = `providers-list:${except_user_id}`
+    const key = `providers:${except_user_id}`
 
     let providers = await this.cacheProvider.retrieve<User[]>(key)
 
@@ -29,9 +29,9 @@ export default class ListProvidersService {
       providers = await this.usersRepository.findAllProviders({
         except_user_id,
       })
-    }
 
-    await this.cacheProvider.store(key, providers)
+      await this.cacheProvider.store(key, providers)
+    }
 
     return providers
   }

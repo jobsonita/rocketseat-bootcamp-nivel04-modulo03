@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe'
 
-import AppError from '@shared/errors/AppError'
-
 import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider'
+
+import AppError from '@shared/errors/AppError'
 
 import IHashProvider from '../providers/HashProvider/models/IHashProvider'
 import IUsersRepository from '../repositories/IUsersRepository'
@@ -45,7 +45,7 @@ export default class CreateUserService {
       password: hashedPassword,
     })
 
-    await this.cacheProvider.invalidatePrefix('providers-list')
+    await this.cacheProvider.invalidatePrefix('providers')
 
     return user
   }
