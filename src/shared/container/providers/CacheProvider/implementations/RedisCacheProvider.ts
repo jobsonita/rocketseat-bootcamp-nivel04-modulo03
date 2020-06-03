@@ -12,14 +12,14 @@ export default class RedisCacheProvider implements ICacheProvider {
     console.log('Redis Cache: connected!')
   }
 
-  public async store(key: string, value: string): Promise<void> {
-    await this.client.set(key, value)
+  public async store(key: string, value: unknown): Promise<void> {
+    await this.client.set(key, JSON.stringify(value))
   }
 
-  public async retrieve(key: string): Promise<string | null> {
-    const data = this.client.get(key)
+  public async retrieve<T>(key: string): Promise<T | null> {
+    const data = await this.client.get(key)
 
-    return data
+    return data ? (JSON.parse(data) as T) : null
   }
 
   public async invalidate(key: string): Promise<void> {}

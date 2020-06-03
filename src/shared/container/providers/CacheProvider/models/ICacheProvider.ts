@@ -1,5 +1,5 @@
 export default interface ICacheProvider {
-  store(key: string, value: string): Promise<void>
-  retrieve(key: string): Promise<string | null>
+  store(key: string, value: unknown): Promise<void>
+  retrieve<T>(key: string): Promise<T | null>
   invalidate(key: string): Promise<void>
 }
