@@ -1,6 +1,10 @@
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository'
 
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider'
+
 import ListProvidersService from './ListProvidersService'
+
+let fakeCacheProvider: FakeCacheProvider
 
 let fakeUsersRepository: FakeUsersRepository
 
@@ -8,9 +12,14 @@ let listProviders: ListProvidersService
 
 describe('ListProviders', () => {
   beforeEach(() => {
+    fakeCacheProvider = new FakeCacheProvider()
+
     fakeUsersRepository = new FakeUsersRepository()
 
-    listProviders = new ListProvidersService(fakeUsersRepository)
+    listProviders = new ListProvidersService(
+      fakeUsersRepository,
+      fakeCacheProvider
+    )
   })
 
   it('should be able to list the providers', async () => {
@@ -37,5 +46,19 @@ describe('ListProviders', () => {
     })
 
     expect(providers).toEqual([provider1, provider2])
+  })
+
+  it('should be able to cache results', async () => {
+    const findAllProviders = jest.spyOn(fakeUsersRepository, 'findAllProviders')
+
+    await listProviders.execute({
+      except_user_id: '123456',
+    })
+
+    await listProviders.execute({
+      except_user_id: '123456',
+    })
+
+    expect(findAllProviders).toBeCalledTimes(1)
   })
 })

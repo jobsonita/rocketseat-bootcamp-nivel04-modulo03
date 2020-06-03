@@ -12,3 +12,5 @@ tmp/**
 **/*.orig
 
 coverage/
+
+.DS_Store

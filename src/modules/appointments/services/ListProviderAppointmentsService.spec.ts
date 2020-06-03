@@ -2,10 +2,14 @@ import Appointment from '../infra/typeorm/entities/Appointment'
 
 import FakeNotificationsRepository from '@modules/notifications/repositories/fakes/FakeNotificationsRepository'
 
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider'
+
 import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository'
 
 import CreateAppointmentService from './CreateAppointmentService'
 import ListProviderAppointmentsService from './ListProviderAppointmentsService'
+
+let fakeCacheProvider: FakeCacheProvider
 
 let fakeAppointmentsRepository: FakeAppointmentsRepository
 let fakeNotificationsRepository: FakeNotificationsRepository
@@ -15,15 +19,19 @@ let listProviderAppointments: ListProviderAppointmentsService
 
 describe('ListProviderAppointments', () => {
   beforeEach(() => {
+    fakeCacheProvider = new FakeCacheProvider()
+
     fakeAppointmentsRepository = new FakeAppointmentsRepository()
     fakeNotificationsRepository = new FakeNotificationsRepository()
 
     createAppointment = new CreateAppointmentService(
       fakeAppointmentsRepository,
-      fakeNotificationsRepository
+      fakeNotificationsRepository,
+      fakeCacheProvider
     )
     listProviderAppointments = new ListProviderAppointmentsService(
-      fakeAppointmentsRepository
+      fakeAppointmentsRepository,
+      fakeCacheProvider
     )
   })
 
@@ -58,5 +66,32 @@ describe('ListProviderAppointments', () => {
     })
 
     expect(listedAppointments).toEqual(appointments)
+  })
+
+  it('should be able to cache results', async () => {
+    jest
+      .spyOn(Date, 'now')
+      .mockImplementation(() => new Date(2020, 4, 10, 12).getTime())
+
+    const findAllInDateFromProvider = jest.spyOn(
+      fakeAppointmentsRepository,
+      'findAllInDayFromProvider'
+    )
+
+    await listProviderAppointments.execute({
+      provider_id: '123123',
+      year: 2020,
+      month: 5,
+      day: 20,
+    })
+
+    await listProviderAppointments.execute({
+      provider_id: '123123',
+      year: 2020,
+      month: 5,
+      day: 20,
+    })
+
+    expect(findAllInDateFromProvider).toBeCalledTimes(1)
   })
 })
