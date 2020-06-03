@@ -12,9 +12,13 @@ import uploadConfig from '@config/upload'
 
 import AppError from '@shared/errors/AppError'
 
+import limitRate from './middlewares/limitRate'
+
 import routes from './routes'
 
 const app = express()
+
+app.use(limitRate)
 
 app.use(cors())
 app.use(express.json())

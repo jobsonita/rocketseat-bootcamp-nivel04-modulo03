@@ -200,3 +200,9 @@ Instalar as dependências:
 yarn add ioredis
 yarn add @types/ioredis -D
 ```
+
+#### Aula 06
+
+```
+yarn add rate-limiter-flexible
+```
