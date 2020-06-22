@@ -55,6 +55,7 @@ export default class AppointmentsRepository implements IAppointmentsRepository {
         provider_id,
         date: Between(startOfDay(date), endOfDay(date)),
       },
+      relations: ['user'],
     })
   }
 
@@ -70,6 +71,7 @@ export default class AppointmentsRepository implements IAppointmentsRepository {
         provider_id,
         date: Between(startOfMonth(date), endOfMonth(date)),
       },
+      relations: ['user'],
     })
   }
 }
