@@ -1,5 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 
+import { classToClass } from 'class-transformer'
+
 import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider'
 
 import Appointment from '../infra/typeorm/entities/Appointment'
@@ -43,7 +45,7 @@ export default class CreateAppointmentService {
         }
       )
 
-      await this.cacheProvider.store(key, appointments)
+      await this.cacheProvider.store(key, classToClass(appointments))
     }
 
     return appointments
