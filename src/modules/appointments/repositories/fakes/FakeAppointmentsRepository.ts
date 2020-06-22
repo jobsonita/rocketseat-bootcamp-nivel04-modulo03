@@ -31,9 +31,14 @@ export default class FakeAppointmentsRepository
     return this.appointments
   }
 
-  public async findByDate(date: Date): Promise<Appointment | undefined> {
-    const existentAppointment = this.appointments.find((appointment) =>
-      isEqual(appointment.date, date)
+  public async findByDate(
+    date: Date,
+    provider_id: string
+  ): Promise<Appointment | undefined> {
+    const existentAppointment = this.appointments.find(
+      (appointment) =>
+        appointment.provider_id === provider_id &&
+        isEqual(appointment.date, date)
     )
     return existentAppointment
   }
